@@ -1,19 +1,32 @@
-function linksExtract(absolutePath){
+const path = require("path");
 
-    const linksPattern =  /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
-    /*Usaremos una expresión regular.
-    El formato del patrón está basado en cómo se escriben los links en los archivos markdown;
-    Ej: [Todos los hitos](../README.md#6-hitos) 
-    El primer y último "/" demarcan que entre ellos está el patrón.
-    Luego están [] que es el paréntesis explicativo, relleno con [^\]]+)\ (que beto a saber...significa "con todo lo que tiene adentro") 
-    Y luego la dirección del sitio entre parentesis (http... y todo lo que tenga adentro.)
-    Finaliza con /g que simboliza que sea una búsqueda global.
-    */
-    const links = [...absolutePath.matchAll(linkPattern)];
+const linksExtract = function(mdFile, absolutePath) {
+  //console.log(mdFile) -- comprobé que el contenido llega a la función y que es, en efecto, un string. 
+  const linksPattern =  /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
+  const links = []; //creo el array que voy a llenar con cada objeto
+  let linkMatch;
 
-    return links;
+  while ((linkMatch = linksPattern.exec(mdFile)) !== null) {
+    const linkText = linkMatch[1];
+    const linkUrl = linkMatch[2];
+    links.push({ text: linkText, url: linkUrl, file: absolutePath });
+  }
+
+ return links;
 }
 
-module.export ={
-    linksExtract
-}
+/*const linksExtract = function(mdFile){
+  const linksPattern =  /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
+  const matches = mdFile.match(linksPattern);
+  /*const links = [];
+  
+    matches.forEach( match => {
+      const linkMatch = linksPattern.exec(match);
+      const linkText = linkMatch[1];
+      const linkUrl = linkMatch[2];
+      links.push({ text: linkText, url: linkUrl, file: mdFile});
+    });
+  
+    return matches;
+  }*/
+module.exports = linksExtract;

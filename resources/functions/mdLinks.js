@@ -9,16 +9,22 @@ const read = require("./readFile.js");
 
 const mdLinks = function(route){ //añadir "validate", como parámetro para el hito 2
 
-
     return new Promise((resolve, reject) => { // la funcion debe retornar una promesa
         const absolutePath = path.resolve(route); //transformo la ruta a absoluta *si está absoluta no pasará nada con este método
         const exist = fs.existsSync(absolutePath); // confirmo si el archivo existe.
         if (exist){
             if (isMarkdown(absolutePath)){ //verifica que sea un archivo Markdown
-                //resolve(absolutePath) 
-                 const fileContent = read(absolutePath);
-                 const linksArray = linksExtract(fileContent);
-                 console.log(linksArray);
+                 const mdContent = read(absolutePath);
+                 mdContent
+                 .then( ()=> {
+                    //console.log(mdContent);
+                    const linksArray = linksExtract(mdContent, absolutePath);// le paso a la función de links, tanto el contenido del archivo leido, como la ruta absoluta para que la pueda incorporar en el objeto.
+                    resolve(linksArray);
+                 })
+                 .catch(error => {
+                    console.error("Error:", error);
+                  });
+             
             } else {
                 reject(new Error ('No es un archivo Markdown') )
             }
