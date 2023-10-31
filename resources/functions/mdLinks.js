@@ -1,8 +1,9 @@
 //Importando las funciones. 
-const {isMarkdown, readFile } = require("./mdFile.js");
-const { linksArray } = require("./linksArray.js");
+const isMarkdown = require("./mdFile.js");
+const  linksExtract  = require("./linksExtract.js");
 const  path  = require("path");
 const fs = require("fs");
+const read = require("./readFile.js");
 
 //INICIO DE MD-LINKS
 
@@ -10,12 +11,20 @@ const mdLinks = function(route){ //añadir "validate", como parámetro para el h
 
 
     return new Promise((resolve, reject) => { // la funcion debe retornar una promesa
-        const newPath = path.resolve(route); //transformo la ruta a absoluta *si está absoluta no pasará nada con este método
-        const exist = fs.existsSync(newPath); // confirmo si el archivo existe.
+        const absolutePath = path.resolve(route); //transformo la ruta a absoluta *si está absoluta no pasará nada con este método
+        const exist = fs.existsSync(absolutePath); // confirmo si el archivo existe.
         if (exist){
-            resolve(newPath) 
+            if (isMarkdown(absolutePath)){ //verifica que sea un archivo Markdown
+                //resolve(absolutePath) 
+                 const fileContent = read(absolutePath);
+                 const linksArray = linksExtract(fileContent);
+                 console.log(linksArray);
+            } else {
+                reject(new Error ('No es un archivo Markdown') )
+            }
+        
         } else {
-            reject ("ruta no existe") //envía un mensaje si la ruta no existe.
+            reject (new Error ("ruta no existe")) //envía un mensaje si la ruta no existe.
         };
         
        ;

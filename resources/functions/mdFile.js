@@ -1,12 +1,19 @@
-function isMarkdown(path){
-//Escribir esta funcion
-}
+const path = require("path");
 
-function readFile(path){
-    //escribir función aqui que lea el archivo buscando si hay enlaces, devolviendo true si los encuentra y false, si no. 
+const isMarkdown = (route) => {
+    const ext = path.extname(route); //guardo en una variable la extensión
+
+    const validExt = [ //guardo en un array, todas las extensiones válidas.
+    '.md', 
+    '.mkd', 
+    '.mdwn',
+    '.mdown', 
+    '.mdtxt', 
+    '.mdtext', 
+    '.markdown', 
+    '.text'];
+    
+    return validExt.includes(ext);
 };
 
-module.export ={
-    isMarkdown,
-    readFile
-};
+module.exports = isMarkdown;

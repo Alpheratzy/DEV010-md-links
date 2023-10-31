@@ -1,6 +1,6 @@
 const mdLinks = require("./resources/functions/mdLinks.js");
 
-mdLinks("./README.md")
+mdLinks("./docs/testFile.md")
   .then(links => {
     console.log(links);// => [{ href, text, file }, ...]
   })
