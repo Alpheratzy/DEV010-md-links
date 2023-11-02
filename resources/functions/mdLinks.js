@@ -17,7 +17,7 @@ const mdLinks = function(route){ //añadir "validate", como parámetro para el h
                  const mdContent = read(absolutePath);
                  mdContent
                  .then( ()=> {
-                    //console.log(mdContent);
+                    console.log(mdContent);
                     const linksArray = linksExtract(mdContent, absolutePath);// le paso a la función de links, tanto el contenido del archivo leido, como la ruta absoluta para que la pueda incorporar en el objeto.
                     resolve(linksArray);
                  })
