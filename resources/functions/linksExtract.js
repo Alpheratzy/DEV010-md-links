@@ -10,6 +10,7 @@ const linksExtract = function(mdFile, absolutePath) {
 
   while ((linkMatch = linksPattern.exec(mdFile)) !== null) {
     // console.log(mdFile);  - no está entrando al while
+    // Pero si entra cuando con StringPrueba.
     const linkText = linkMatch[1];
     const linkUrl = linkMatch[2];
     links.push({ text: linkText, url: linkUrl, file: absolutePath });
@@ -17,19 +18,4 @@ const linksExtract = function(mdFile, absolutePath) {
 
  return links;
 }
-
-/*const linksExtract = function(mdFile){
-  const linksPattern =  /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
-  const matches = mdFile.match(linksPattern);
-  /*const links = [];
-  
-    matches.forEach( match => {
-      const linkMatch = linksPattern.exec(match);
-      const linkText = linkMatch[1];
-      const linkUrl = linkMatch[2];
-      links.push({ text: linkText, url: linkUrl, file: mdFile});
-    });
-  
-    return matches;
-  }*/
 module.exports = linksExtract;
