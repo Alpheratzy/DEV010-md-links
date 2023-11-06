@@ -7,8 +7,7 @@ const read = require("./readFile.js");
 
 //INICIO DE MD-LINKS
 
-const mdLinks = function(route){ //añadir "validate", como parámetro para el hito 2
-
+function mdLinks (route){ //añadir "validate", como parámetro para el hito 2
     return new Promise((resolve, reject) => { // la funcion debe retornar una promesa
         const absolutePath = path.resolve(route); //transformo la ruta a absoluta *si está absoluta no pasará nada con este método
         const exist = fs.existsSync(absolutePath); // confirmo si el archivo existe.
