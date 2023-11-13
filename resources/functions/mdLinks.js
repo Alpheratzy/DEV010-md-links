@@ -4,6 +4,7 @@ const  linksExtract  = require("./linksExtract.js");
 const  path  = require("path");
 const fs = require("fs");
 const read = require("./readFile.js");
+const validator = require("./validator.js");
 
 //INICIO DE MD-LINKS
 
@@ -22,7 +23,9 @@ function mdLinks (route, validate){ //añadir "validate", como parámetro para e
                     if(validate === false){
                         resolve(linksArray);
                     }else{
-                        
+                        // console.log (linksArray);
+                        const linksArrayValidated = validator(linksArray);
+                        resolve (linksArrayValidated)
                     }
                  })
                  .catch(error => {
