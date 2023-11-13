@@ -7,7 +7,7 @@ const read = require("./readFile.js");
 
 //INICIO DE MD-LINKS
 
-function mdLinks (route){ //añadir "validate", como parámetro para el hito 2
+function mdLinks (route, validate){ //añadir "validate", como parámetro para el hito 2
     return new Promise((resolve, reject) => { // la funcion debe retornar una promesa
         const absolutePath = path.resolve(route); //transformo la ruta a absoluta *si está absoluta no pasará nada con este método
         const exist = fs.existsSync(absolutePath); // confirmo si el archivo existe.
@@ -18,7 +18,12 @@ function mdLinks (route){ //añadir "validate", como parámetro para el hito 2
                  .then( (result)=> {
                     const text = result;
                     const linksArray = linksExtract(text, absolutePath);// le paso a la función de links, tanto el contenido del archivo leido, como la ruta absoluta para que la pueda incorporar en el objeto.
-                    resolve(linksArray);
+                    
+                    if(validate === false){
+                        resolve(linksArray);
+                    }else{
+                        
+                    }
                  })
                  .catch(error => {
                     console.error("Error:", error);
@@ -38,5 +43,6 @@ function mdLinks (route){ //añadir "validate", como parámetro para el hito 2
 
 });
 };
+
 
 module.exports = mdLinks;
