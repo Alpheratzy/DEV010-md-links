@@ -3,13 +3,13 @@
 const mdLinks = require("./resources/functions/mdLinks.js");
 
 if(process.argv.includes('--validate')){
-  mdLinks("./docs/testFile.md", true)
+  mdLinks("./README.md", true)
   .then(links => {
     console.log(links); // => [{ href, text, file }, ...]
   })
   .catch(console.error);
 }else{
-  mdLinks("./docs/testFile.md", false)
+  mdLinks("./README.md", false)
   .then(links => {
     console.log(links);
   })

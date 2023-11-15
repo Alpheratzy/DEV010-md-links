@@ -8,7 +8,6 @@ function read(path) {
         console.error("Error: ", err);
         reject(err);
       } else {
-        //console.log(data);
         resolve(data);
       }
     });

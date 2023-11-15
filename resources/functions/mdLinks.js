@@ -1,4 +1,4 @@
-//Importando las funciones. 
+//IMPORTACIONES. 
 const isMarkdown = require("./mdFile.js");
 const  linksExtract  = require("./linksExtract.js");
 const  path  = require("path");
@@ -8,9 +8,9 @@ const validator = require("./validator.js");
 
 //INICIO DE MD-LINKS
 
-function mdLinks (route, validate){ //añadir "validate", como parámetro para el hito 2
+function mdLinks (route, validate){ 
     return new Promise((resolve, reject) => { // la funcion debe retornar una promesa
-        const absolutePath = path.resolve(route); //transformo la ruta a absoluta *si está absoluta no pasará nada con este método
+        const absolutePath = path.resolve(route); //transformo la ruta a absoluta 
         const exist = fs.existsSync(absolutePath); // confirmo si el archivo existe.
         if (exist){
             if (isMarkdown(absolutePath)){ //verifica que sea un archivo Markdown
@@ -18,12 +18,11 @@ function mdLinks (route, validate){ //añadir "validate", como parámetro para e
                  mdContent
                  .then( (result)=> {
                     const text = result;
-                    const linksArray = linksExtract(text, absolutePath);// le paso a la función de links, tanto el contenido del archivo leido, como la ruta absoluta para que la pueda incorporar en el objeto.
+                    const linksArray = linksExtract(text, absolutePath);// Extraigo los links
                     
                     if(validate === false){
                         resolve(linksArray);
                     }else{
-                        // console.log (linksArray);
                         const linksArrayValidated = validator(linksArray);
                         resolve (linksArrayValidated)
                     }
@@ -37,15 +36,9 @@ function mdLinks (route, validate){ //añadir "validate", como parámetro para e
             }
         
         } else {
-            reject (new Error ("ruta no existe")) //envía un mensaje si la ruta no existe.
+            reject (new Error ("ruta no existe")) 
         };
-        
-       ;
-
-     /* reject("chao")*/
-
-});
+    });
 };
-
 
 module.exports = mdLinks;

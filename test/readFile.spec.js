@@ -7,7 +7,7 @@ describe('readFile', () => {
       const read = await readFile("docs/testFile.md");
       expect(read).toBe ("Este es otro archivo de testing");
     } catch (error) {
-     // ni idea de que hacer aqui
+      console.log("error al leer archivo");
     }
   });
 

@@ -27,9 +27,9 @@ describe("validator", () => {
     
     const result = validator(array);
 
-    expect(result).toBeInstanceOf(Promise);//retorna la promesa de la función
+    expect(result).toBeInstanceOf(Promise);//comprueba si retorna una promesa
 
-    return validator(array).then(result => { //y evalúa que el resultado sea un array
+    return validator(array).then(result => { //comprueba que el resultado sea un array...
 
       result.forEach(obj => {
         expect(obj).toHaveProperty("status");  //que contenga status
