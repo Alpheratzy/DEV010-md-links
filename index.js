@@ -17,6 +17,7 @@ if(process.argv.includes('--validate')){
 }
   //TOOLS TO TRY AND LEARN
   // "./README.md"
+  // "./docs/testFile.md"
   // console.log(process.argv);
 
   module.exports = mdLinks;

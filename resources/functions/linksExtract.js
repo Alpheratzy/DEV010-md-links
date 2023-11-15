@@ -2,7 +2,7 @@ const path = require("path");
 
 const linksExtract = function(mdFile, absolutePath) {
 // console.log(mdFile) // comprobé que el contenido llega a la función y que es, en efecto, un string. 
- const linksPattern =  /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
+  const linksPattern =  /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
   const links = []; //creo el array que voy a llenar con cada objeto
   let linkMatch;
   // const stringPrueba = "Esto es una prueba [Node.js](https://nodejs.org/), [Markdown](https://es.wikipedia.org/wiki/Markdown) ";
